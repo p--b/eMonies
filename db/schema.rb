@@ -11,10 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140925150914) do
+ActiveRecord::Schema.define(:version => 20140925150622) do
 
-# Could not dump table "acceptances" because of following StandardError
-#   Unknown type 'belongs_to' for column 'person'
+  create_table "acceptances", :force => true do |t|
+    t.integer  "amount"
+    t.text     "note"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "people", :force => true do |t|
     t.string   "name"
@@ -26,7 +30,12 @@ ActiveRecord::Schema.define(:version => 20140925150914) do
     t.datetime "updated_at",     :null => false
   end
 
-# Could not dump table "purchases" because of following StandardError
-#   Unknown type 'belongs_to' for column 'person'
+  create_table "purchases", :force => true do |t|
+    t.string   "name"
+    t.integer  "amount"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
 end

@@ -1,5 +1,5 @@
 EMonies::Application.routes.draw do
-  devise_for :people
+  devise_for :people, :controllers => { :registrations => :registrations }
   root :to => 'special#index'
 
   resources :people

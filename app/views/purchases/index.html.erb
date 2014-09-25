@@ -3,6 +3,7 @@
 <table>
   <tr>
     <th>Name</th>
+    <th>By</th>
     <th>Amount</th>
     <th>Description</th>
     <th></th>
@@ -13,6 +14,7 @@
 <% @purchases.each do |purchase| %>
   <tr>
     <td><%= purchase.name %></td>
+    <td><%= purchase.person.name %></td>
     <td><%= purchase.amount %></td>
     <td><%= purchase.description %></td>
     <td><%= link_to 'Show', purchase %></td>

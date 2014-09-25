@@ -40,7 +40,7 @@ class PurchasesController < ApplicationController
   # POST /purchases
   # POST /purchases.json
   def create
-    @purchase = Purchase.new(params[:purchase])
+    @purchase = Purchase.new(purchase_params)
 
     respond_to do |format|
       if @purchase.save
@@ -59,7 +59,7 @@ class PurchasesController < ApplicationController
     @purchase = Purchase.find(params[:id])
 
     respond_to do |format|
-      if @purchase.update_attributes(params[:purchase])
+      if @purchase.update_attributes(purchase_params)
         format.html { redirect_to @purchase, notice: 'Purchase was successfully updated.' }
         format.json { head :no_content }
       else
@@ -79,5 +79,10 @@ class PurchasesController < ApplicationController
       format.html { redirect_to purchases_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def purchase_params
+    params.require(:purchase).permit(:name, :amount, :description, :person_id)
   end
 end

@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>Date</th>
     <th>Name</th>
     <th>By</th>
     <th>Amount</th>
@@ -14,6 +15,7 @@
 
 <% @purchases.each do |purchase| %>
   <tr>
+    <td><%= purchase.date %></td>
     <td><%= purchase.name %></td>
     <td><%= purchase.person.name %></td>
     <td><%= purchase.amount %></td>

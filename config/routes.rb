@@ -1,4 +1,6 @@
 EMonies::Application.routes.draw do
+  resources :acceptances
+
   resources :people
 
   resources :purchases

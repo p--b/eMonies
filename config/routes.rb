@@ -1,8 +1,5 @@
 EMonies::Application.routes.draw do
-  resources :acceptances
-
   resources :people
-
   resources :purchases
 
   # The priority is based upon order of creation:

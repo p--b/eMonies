@@ -9,7 +9,6 @@
     <th>Sort code</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @people.each do |person| %>
@@ -21,7 +20,6 @@
     <td><%= person.sort_code %></td>
     <td><%= link_to 'Show', person %></td>
     <td><%= link_to 'Edit', edit_person_path(person) %></td>
-    <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

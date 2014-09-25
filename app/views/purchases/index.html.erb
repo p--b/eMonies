@@ -6,6 +6,9 @@
     <th>By</th>
     <th>Amount</th>
     <th>Description</th>
+    <th>Accepted by me</th>
+    <th>Accepted total</th>
+    <th>Done</th>
     <th></th>
     <th></th>
     <th></th>
@@ -17,6 +20,9 @@
     <td><%= purchase.person.name %></td>
     <td><%= purchase.amount %></td>
     <td><%= purchase.description %></td>
+    <td><%= purchase.accepted_by_me %></td>
+    <td><%= purchase.accepted_total %></td>
+    <td><%= check_box_tag("check#{purchase.id}", "1", purchase.accepted_total == purchase.amount, :disabled=>true) %></td>
     <td><%= link_to 'Show', purchase %></td>
     <td><%= link_to 'Edit', edit_purchase_path(purchase) %></td>
     <td><%= link_to 'Destroy', purchase, method: :delete, data: { confirm: 'Are you sure?' } %></td>

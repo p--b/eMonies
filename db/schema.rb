@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140925195830) do
+ActiveRecord::Schema.define(version: 20140925214607) do
 
   create_table "acceptances", force: true do |t|
     t.integer  "amount"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20140925195830) do
     t.integer  "purchase_id"
   end
 
-  create_table "ownednesses", force: true do |t|
+  create_table "owednesses", force: true do |t|
     t.integer "from_person_id"
     t.integer "to_person_id"
     t.integer "amount"

@@ -1,4 +1,6 @@
 EMonies::Application.routes.draw do
+  root :to => 'special#index'
+
   resources :people
   resources :purchases
 

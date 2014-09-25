@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
 
+<h3>Purchase</h3>
 <p>
   <b>Name:</b>
   <%= @purchase.name %>
@@ -20,6 +21,32 @@
   <%= @purchase.description %>
 </p>
 
+<hr />
+<h3>Acceptances</h3>
+<table>
+  <tr>
+    <th>By</th>
+    <th>Amount</th>
+    <th>Note</th>
+  </tr>
+<% @purchase.acceptances.each do |acceptance| %>
+  <tr>
+    <td><%= acceptance.person.name %></td>
+    <td><%= acceptance.amount %></td>
+    <td><%= acceptance.note %></td>
+  </tr>
+<% end %>
+  <tr>
+    <td>Total:</td>
+    <td><%= @purchase.accepted_total %></td>
+    <td></td>
+  </tr>
+</table>
+
+<h3>Change mine</h3>
+<%= render partial: "acceptances/form", locals: {acceptance: @my_acceptance} %>
+
+<hr />
 <% if @purchase.person == current_person then %>
 <%= link_to 'Edit', edit_purchase_path(@purchase) %> |
 <% end %>

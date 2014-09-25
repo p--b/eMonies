@@ -4,6 +4,7 @@ EMonies::Application.routes.draw do
 
   resources :people
   resources :purchases
+  resources :acceptances
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

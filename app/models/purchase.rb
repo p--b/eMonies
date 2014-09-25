@@ -19,7 +19,7 @@ class Purchase < ActiveRecord::Base
     end
   end
 
-  def accepted_by_me
+  def accepted_by_me(current_person)
     self.acceptances.each do |a|
       if a.person == current_person then
         return a.amount
@@ -30,7 +30,7 @@ class Purchase < ActiveRecord::Base
 
   def accepted_total
     self.acceptances.reduce(0) do |acc, a|
-      acc + a.amount
+      acc + (a.amount.nil? ? 0 : a.amount)
     end
   end
 end

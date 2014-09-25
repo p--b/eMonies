@@ -16,6 +16,11 @@ class PurchasesController < ApplicationController
   # GET /purchases/1.json
   def show
     @purchase = Purchase.find(params[:id])
+    @my_acceptance = @purchase.acceptances.where("person_id = ?", current_person.id)[0]
+    if @my_acceptance.nil? then
+      @my_acceptance = @purchase.acceptances.new
+      @my_acceptance.person = current_person
+    end
 
     respond_to do |format|
       format.html # show.html.erb

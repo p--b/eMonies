@@ -1,4 +1,6 @@
 class PeopleController < ApplicationController
+  before_action :authenticate_person!
+
   # GET /people
   # GET /people.json
   def index

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140925170241) do
+ActiveRecord::Schema.define(version: 20140925171212) do
 
   create_table "acceptances", force: true do |t|
     t.integer  "amount"
@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(version: 20140925170241) do
   create_table "people", force: true do |t|
     t.string   "name"
     t.string   "username"
-    t.string   "password"
     t.integer  "account_number"
     t.integer  "sort_code"
     t.datetime "created_at",                         null: false
@@ -41,6 +40,7 @@ ActiveRecord::Schema.define(version: 20140925170241) do
     t.integer  "failed_attempts",        default: 0, null: false
     t.string   "unlock_token"
     t.datetime "locked_at"
+    t.text     "encrypted_password"
   end
 
   add_index "people", ["reset_password_token"], name: "index_people_on_reset_password_token", unique: true

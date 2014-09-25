@@ -1,4 +1,6 @@
 class PurchasesController < ApplicationController
+  before_action :authenticate_person!
+
   # GET /purchases
   # GET /purchases.json
   def index

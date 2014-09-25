@@ -1,1 +1,30 @@
 <h1>Summary</h1>
+
+<p>This table shows the money (and the negative) owed from one person to another.
+A positive amount indicates money is owed in that direction. Read in row then column order (to, from).
+</p>
+
+<table>
+  <tr>
+    <th></th>
+    <th>From</th>
+  </tr>
+
+  <tr>
+    <th>To</th>
+    <th>\</th>
+    <% Person.all.each do |from| %>
+    <th><%= from.name %></th>
+    <% end %>
+  </tr>
+
+  <% Person.all.each do |to| %>
+  <tr>
+    <th></th>
+    <th><%= to.name %></th>
+    <% Person.all.each do |from| %>
+    <td><%= (to == from ? "~" : Owedness.owes(to, from)) %></td>
+    <% end %>
+  </tr>
+  <% end %>
+</table>

@@ -42,7 +42,9 @@ class PurchasesController < ApplicationController
   # POST /purchases
   # POST /purchases.json
   def create
-    @purchase = Purchase.new(purchase_params)
+    p = purchase_params
+    p[:person_id] = current_person.id
+    @purchase = Purchase.new(p)
 
     respond_to do |format|
       if @purchase.save
@@ -61,7 +63,7 @@ class PurchasesController < ApplicationController
     @purchase = Purchase.find(params[:id])
 
     respond_to do |format|
-      if @purchase.update_attributes(purchase_params)
+      if @purchase.person == current_person && @purchase.update_attributes(purchase_params)
         format.html { redirect_to @purchase, notice: 'Purchase was successfully updated.' }
         format.json { head :no_content }
       else
@@ -75,16 +77,24 @@ class PurchasesController < ApplicationController
   # DELETE /purchases/1.json
   def destroy
     @purchase = Purchase.find(params[:id])
-    @purchase.destroy
 
-    respond_to do |format|
-      format.html { redirect_to purchases_url }
-      format.json { head :no_content }
+    if @purchase.person == current_person then
+      @purchase.destroy
+
+      respond_to do |format|
+        format.html { redirect_to purchases_url }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to purchases_url, :flash => { :error => "Can't delete another users purchases" }}
+        format.json { head :no_content }
+      end
     end
   end
 
   private
   def purchase_params
-    params.require(:purchase).permit(:name, :amount, :description, :person_id)
+    params.require(:purchase).permit(:name, :amount, :description)
   end
 end

@@ -1,3 +1,5 @@
+require 'purchases_helper'
+
 class AcceptancesController < ApplicationController
   before_action :authenticate_person!
 
@@ -10,6 +12,8 @@ class AcceptancesController < ApplicationController
 
     respond_to do |format|
       if @acceptance.save
+        PurchasesHelper.recalculate_owes!
+
         format.html { redirect_to @acceptance.purchase, notice: 'Acceptance was successfully created.' }
         format.json { render json: @acceptance, status: :created, location: @acceptance }
       else
@@ -26,6 +30,8 @@ class AcceptancesController < ApplicationController
 
     respond_to do |format|
       if @acceptance.person == current_person && @acceptance.update_attributes(acceptance_params)
+        PurchasesHelper.recalculate_owes!
+
         format.html { redirect_to @acceptance.purchase, notice: 'Acceptance was successfully updated.' }
         format.json { head :no_content }
       else

@@ -1,3 +1,5 @@
+require 'purchases_helper'
+
 class PurchasesController < ApplicationController
   before_action :authenticate_person!
 
@@ -53,6 +55,8 @@ class PurchasesController < ApplicationController
 
     respond_to do |format|
       if @purchase.save
+        PurchasesHelper.recalculate_owes!
+
         format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }
         format.json { render json: @purchase, status: :created, location: @purchase }
       else
@@ -69,6 +73,8 @@ class PurchasesController < ApplicationController
 
     respond_to do |format|
       if @purchase.person == current_person && @purchase.update_attributes(purchase_params)
+        PurchasesHelper.recalculate_owes!
+
         format.html { redirect_to @purchase, notice: 'Purchase was successfully updated.' }
         format.json { head :no_content }
       else
@@ -85,6 +91,7 @@ class PurchasesController < ApplicationController
 
     if @purchase.person == current_person then
       @purchase.destroy
+      PurchasesHelper.recalculate_owes!
 
       respond_to do |format|
         format.html { redirect_to purchases_url }

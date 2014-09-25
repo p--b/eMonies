@@ -29,7 +29,7 @@ module PurchasesHelper
     alias_method :length, :rows
   end
 
-  def self.recalculate_owes
+  def self.recalculate_owes!
     n_people = Person.all.size
 
     # Use a nxn array structure, in row -> column order. rows are who paid for an item, columns are the amount owed by the others to that person.

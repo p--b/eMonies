@@ -2,6 +2,8 @@ EMonies::Application.routes.draw do
   devise_for :people, :controllers => { :registrations => :registrations }
   root :to => 'special#index'
 
+  get 'summary' => 'special#summary'
+
   resources :people
   resources :purchases
   resources :acceptances

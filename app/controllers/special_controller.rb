@@ -10,4 +10,10 @@ class SpecialController < ApplicationController
       format.html #index.html.erb
     end
   end
+
+  def summary
+    respond_to do |format|
+      format.html #summary.html.erb
+    end
+  end
 end

@@ -10,8 +10,6 @@
     <th>Accepted total</th>
     <th>Done</th>
     <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @purchases.each do |purchase| %>
@@ -24,8 +22,6 @@
     <td><%= purchase.accepted_total %></td>
     <td><%= check_box_tag("check#{purchase.id}", "1", purchase.accepted_total == purchase.amount, :disabled=>true) %></td>
     <td><%= link_to 'Show', purchase %></td>
-    <td><%= link_to 'Edit', edit_purchase_path(purchase) %></td>
-    <td><%= link_to 'Destroy', purchase, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

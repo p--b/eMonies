@@ -20,7 +20,7 @@
   <%= @purchase.description %>
 </p>
 
-<% if @purchase.person == @current_person then %>
+<% if @purchase.person == current_person then %>
 <%= link_to 'Edit', edit_purchase_path(@purchase) %> |
 <% end %>
 

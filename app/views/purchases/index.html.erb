@@ -18,10 +18,10 @@
     <td><%= purchase.date %></td>
     <td><%= purchase.name %></td>
     <td><%= purchase.person.name %></td>
-    <td><%= purchase.amount %></td>
+    <td><%= to_money purchase.amount %></td>
     <td><%= purchase.description %></td>
-    <td><%= purchase.accepted_by_me(current_person) %></td>
-    <td><%= purchase.accepted_total %></td>
+    <td><%= to_money(purchase.accepted_by_me(current_person) || 0) %></td>
+    <td><%= to_money purchase.accepted_total %></td>
     <td><%= check_box_tag("check#{purchase.id}", "1", purchase.accepted_total == purchase.amount, :disabled=>true) %></td>
     <td><%= link_to 'Show', purchase %></td>
   </tr>

@@ -23,7 +23,7 @@ A positive amount indicates money is owed in that direction. Read in row then co
     <th></th>
     <th><%= to.name %></th>
     <% Person.all.each do |from| %>
-    <td><%= (to == from ? "~" : Owedness.owes(to, from)) %></td>
+    <td><%= (to == from ? "~" : to_money(Owedness.owes(to, from))) %></td>
     <% end %>
   </tr>
   <% end %>
@@ -41,7 +41,7 @@ A positive amount indicates money is owed in that direction. Read in row then co
   <tr>
     <td><%= trans.to_person.name %></td>
     <td><%= trans.from_person.name %></td>
-    <td><%= trans.amount %></td>
+    <td><%= to_money trans.amount %></td>
   </tr>
   <% end %>
 </table>

@@ -1,7 +1,7 @@
 class Purchase < ActiveRecord::Base
   validates :name, presence: true
   validates :amount, presence: true
-  validates :amount, numericality: true
+  validates :amount, numericality: {only_integer: false}
   validates :person_id, presence: true
 
   belongs_to :person
@@ -34,5 +34,13 @@ class Purchase < ActiveRecord::Base
     self.acceptances.reduce(0) do |acc, a|
       acc + (a.amount.nil? ? 0 : a.amount)
     end
+  end
+
+  def amount
+    (read_attribute(:amount) || 0)/100.to_f
+  end
+
+  def amount=(value)
+    write_attribute(:amount, (value.to_f*100).to_i)
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140925214607) do
+ActiveRecord::Schema.define(version: 20140927205918) do
 
   create_table "acceptances", force: true do |t|
     t.integer  "amount"
@@ -20,6 +20,12 @@ ActiveRecord::Schema.define(version: 20140925214607) do
     t.datetime "updated_at",  null: false
     t.integer  "person_id"
     t.integer  "purchase_id"
+  end
+
+  create_table "minimal_transactions", force: true do |t|
+    t.integer "from_person_id"
+    t.integer "to_person_id"
+    t.integer "amount"
   end
 
   create_table "owednesses", force: true do |t|

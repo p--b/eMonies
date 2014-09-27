@@ -62,19 +62,57 @@ module PurchasesHelper
       end
     end
 
-    # Store this in the caching table Owednesses
     Owedness.delete_all
 
+    person_books = {}
+
+    #Iterate over the triangular form
     d.hash.each do |to, froms|
       froms.each do |from, amount|
         next if to < from
 
+        # Store this in the caching table Owednesses
         o = Owedness.new(from_person: Person.find(from), to_person: Person.find(to), amount: amount)
         o.save!
         oi = Owedness.new(from_person: Person.find(to), to_person: Person.find(from), amount: -amount)
         oi.save!
+
+        person_books[to] = 0 unless person_books.key? to
+        person_books[from] = 0 unless person_books.key? from
+
+        person_books[from] -= amount
+        person_books[to] += amount
+
       end
     end
+
+    # Calculate the minimum possible transactions to fix this
+    transactions = []
+
+    negative_people = {}
+    positive_people = {}
+
+    person_books.each do |p, balance|
+      if balance < 0 then
+        negative_people.store p, balance
+      else
+        positive_people.store p, balance
+      end
+    end
+
+    positive_people.each do |to, exp|
+      next if exp == 0
+      negative_people.each do |from, possible|
+        amt = (exp < -possible) ? exp : -possible
+        transactions.push Hash[from: from, to: to, amount: amt]
+        negative_people[from] -= amt
+        negative_people.delete(from) if negative_people[from] == 0
+      end
+    end
+
+    # Store the required transactions
+    MinimalTransaction.delete_all
+    transactions.each { |trans| MinimalTransaction.new(from_person: Person.find(trans[:from]), to_person: Person.find(trans[:to]), amount: trans[:amount]).save! }
 
     true
   end

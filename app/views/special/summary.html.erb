@@ -28,3 +28,20 @@ A positive amount indicates money is owed in that direction. Read in row then co
   </tr>
   <% end %>
 </table>
+
+<hr />
+<h2>Minimal transactions required to fix</h2>
+<table>
+  <tr>
+    <th>To</th>
+    <th>From</th>
+    <th>Amount</th>
+  </tr>
+  <% MinimalTransaction.all.each do |trans| %>
+  <tr>
+    <td><%= trans.to_person.name %></td>
+    <td><%= trans.from_person.name %></td>
+    <td><%= trans.amount %></td>
+  </tr>
+  <% end %>
+</table>

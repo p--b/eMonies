@@ -8,6 +8,7 @@
 </head>
 <body>
 
+<% unless current_person.nil? then %>
 <nav class="mainnav">
   <ul>
     <li><%= link_to "Record a purchase", :new_purchase %></li>
@@ -19,6 +20,7 @@
     <li><%= link_to "Logout", destroy_person_session_path, :method=>:delete %></li>
   </ul>
 </nav>
+<% end %>
 
 <%= yield %>
 
